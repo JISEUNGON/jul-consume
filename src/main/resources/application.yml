@@ -24,7 +24,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: ${EUREKA_SERVER_HOST}:8761/eureka
+      defaultZone: ${EUREKA_SERVER_HOST}/eureka
 
 jwt:
   secret: ${JWT_SECRET_KEY}
