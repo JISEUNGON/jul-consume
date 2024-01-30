@@ -1,5 +1,6 @@
 package com.julindang.consume.service;
 
+import com.julindang.consume.dto.response.TodayConsumeResponseDto;
 import com.julindang.consume.exception.consume.ParameterNullOrEmptyException;
 import com.julindang.consume.util.JwtUtil;
 import jakarta.transaction.Transactional;
@@ -10,6 +11,9 @@ import com.julindang.consume.dto.request.ConsumeSaveRequestDto;
 import com.julindang.consume.dto.response.ConsumeSaveResponseDto;
 import com.julindang.consume.repository.ConsumeRepository;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.List;
 
 import static com.julindang.consume.config.MapperConfig.modelMapper;
 
@@ -47,5 +51,20 @@ public class ConsumeServiceImpl implements ConsumeService {
                 ),
                 ConsumeSaveResponseDto.class
         );
+    }
+
+    @Override
+    @Transactional
+    public TodayConsumeResponseDto getTodayConsume() {
+        final List<Consume> todayConsumes = consumeRepository.findByCreatedAt(LocalDate.now());
+        Double consumes = 0D;
+
+        for(Consume consume: todayConsumes) {
+            consumes += consume.getSugar();
+        }
+
+        return TodayConsumeResponseDto.builder()
+                .totalConsume(Math.round(consumes))
+                .build();
     }
 }
