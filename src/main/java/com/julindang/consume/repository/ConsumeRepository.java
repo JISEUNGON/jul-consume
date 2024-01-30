@@ -9,6 +9,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface ConsumeRepository extends JpaRepository<Consume, Long> {
-    @Query("SELECT c FROM Consume c WHERE date(c.createdAt) = :now")
-    public List<Consume> findByCreatedAt(@Param("now")LocalDate now);
+    @Query("SELECT c FROM Consume c WHERE date(c.createdAt) = :now and c.memberId = :memberId")
+    public List<Consume> findByMemberIdAndCreatedAt(@Param("now")LocalDate now, @Param("memberId") Long memberId);
 }

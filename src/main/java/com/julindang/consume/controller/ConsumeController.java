@@ -2,6 +2,7 @@ package com.julindang.consume.controller;
 
 import com.julindang.consume.dto.response.ConsumeSaveResponseDto;
 import com.julindang.consume.dto.response.TodayConsumeResponseDto;
+import com.julindang.consume.dto.response.TodayTotalConsumeResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.julindang.consume.dto.request.ConsumeSaveRequestDto;
@@ -25,11 +26,19 @@ public class ConsumeController {
     }
 
     /**
-     * 오늘의 섭취량
+     * 오늘의 총 당 섭취량
+     * */
+    @GetMapping("/total")
+    public ResponseEntity<TodayTotalConsumeResponseDto> getTodayTotalConsume() {
+        return ResponseEntity.ok(consumeService.getTodayTotalConsume());
+    }
+
+    /**
+     * 오늘의 당 섭취 기록
      * */
     @GetMapping("/today")
-    public ResponseEntity<TodayConsumeResponseDto> getTodayConsume() {
-        return ResponseEntity.ok(consumeService.getTodayConsume());
+    public ResponseEntity<TodayConsumeResponseDto> getTodayConsumes() {
+        return ResponseEntity.ok(consumeService.getTodayConsumes());
     }
 
     /**

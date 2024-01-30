@@ -1,13 +1,17 @@
 package com.julindang.consume.dto.response;
 
+import com.julindang.consume.vo.ConsumeVo;
 import lombok.*;
-import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Getter
 @Setter
-@Builder
 public class TodayConsumeResponseDto {
-    private Long totalConsume;
+    private Long totalSugar;
+    private Long totalCalorie;
+    private List<ConsumeVo> consumeVoList;
 }

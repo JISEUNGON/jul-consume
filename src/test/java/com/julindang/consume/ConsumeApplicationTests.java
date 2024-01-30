@@ -1,6 +1,6 @@
 package com.julindang.consume;
 
-import com.julindang.consume.dto.response.TodayConsumeResponseDto;
+import com.julindang.consume.dto.response.TodayTotalConsumeResponseDto;
 import com.julindang.consume.service.ConsumeService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ class ConsumeApplicationTests {
 
     @Test
     void contextLoads() {
-        final TodayConsumeResponseDto todayConsume = consumeService.getTodayConsume();
+        final TodayTotalConsumeResponseDto todayConsume = consumeService.getTodayTotalConsume();
     }
 
 }
