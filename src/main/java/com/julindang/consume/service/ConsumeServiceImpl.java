@@ -1,7 +1,6 @@
 package com.julindang.consume.service;
 
-import com.julindang.consume.dto.response.TodayConsumeResponseDto;
-import com.julindang.consume.dto.response.TodayTotalConsumeResponseDto;
+import com.julindang.consume.dto.response.*;
 import com.julindang.consume.exception.consume.ParameterNullOrEmptyException;
 import com.julindang.consume.util.JwtUtil;
 import com.julindang.consume.vo.ConsumeVo;
@@ -10,13 +9,17 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.julindang.consume.domain.Consume;
 import com.julindang.consume.dto.request.ConsumeSaveRequestDto;
-import com.julindang.consume.dto.response.ConsumeSaveResponseDto;
 import com.julindang.consume.repository.ConsumeRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.julindang.consume.config.MapperConfig.modelMapper;
 
@@ -91,5 +94,45 @@ public class ConsumeServiceImpl implements ConsumeService {
                 .totalSugar(Math.round(sugars))
                 .consumeVoList(consumeVoList)
                 .build();
+    }
+
+    @Override
+    @Transactional
+    public List<ConsumeOfDayResponseDto> getConsumeOfDay() {
+        final List<Consume> byWeekConsumes = consumeRepository.findByDayConsumes(LocalDate.now().minusDays(6), LocalDate.now(), JwtUtil.getMemberId());
+        List<ConsumeOfDayResponseDto> responseDtoList = new ArrayList<>();
+
+        for (Consume consume: byWeekConsumes) {
+            responseDtoList.add(
+                    ConsumeOfDayResponseDto.builder()
+                            .date(consume.getCreatedAt().toLocalDate())
+                            .sugar(Math.round(consume.getSugar()))
+                            .build()
+            );
+        }
+
+        return responseDtoList;
+    }
+
+    @Override
+    @Transactional
+    public List<ConsumeOfWeekResponseDto> getConsumeOfWeek() {
+        // 이번 달의 시작과 끝을 구합니다.
+        LocalDate now = LocalDate.now();
+        LocalDate start = now.with(TemporalAdjusters.firstDayOfMonth());
+        LocalDate end = now.with(TemporalAdjusters.lastDayOfMonth());
+
+        // 이번 달의 데이터를 가져옵니다.
+        List<Consume> consumes = consumeRepository.findByWeekConsumes(start, end, JwtUtil.getMemberId());
+
+        // 주별로 그룹핑하고 sugar의 평균을 계산합니다.
+        Map<Integer, Double> averages = consumes.stream()
+                .collect(Collectors.groupingBy(
+                        consume -> consume.getCreatedAt().toLocalDate().get(WeekFields.of(Locale.getDefault()).weekOfYear()),
+                        Collectors.averagingDouble(Consume::getSugar)));
+
+        log.info("averages: {}", averages);
+
+        return null;
     }
 }

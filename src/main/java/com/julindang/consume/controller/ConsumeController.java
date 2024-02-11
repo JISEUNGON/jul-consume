@@ -1,14 +1,14 @@
 package com.julindang.consume.controller;
 
-import com.julindang.consume.dto.response.ConsumeSaveResponseDto;
-import com.julindang.consume.dto.response.TodayConsumeResponseDto;
-import com.julindang.consume.dto.response.TodayTotalConsumeResponseDto;
+import com.julindang.consume.dto.response.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.julindang.consume.dto.request.ConsumeSaveRequestDto;
 import com.julindang.consume.service.ConsumeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/consume")
@@ -42,8 +42,20 @@ public class ConsumeController {
     }
 
     /**
+     * 일별 섭취량
+     * */
+    @GetMapping("/day")
+    public ResponseEntity<List<ConsumeOfDayResponseDto>> getConsumeOfDay() {
+        return ResponseEntity.ok(consumeService.getConsumeOfDay());
+    }
+
+    /**
      * 주별 섭취량
      * */
+    @GetMapping("/week")
+    public ResponseEntity<List<ConsumeOfWeekResponseDto>> getConsumeOfWeek() {
+        return ResponseEntity.ok(consumeService.getConsumeOfWeek());
+    }
 
     /**
      * 월별 섭취량
