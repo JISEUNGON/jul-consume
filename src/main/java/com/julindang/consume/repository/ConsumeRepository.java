@@ -1,6 +1,7 @@
 package com.julindang.consume.repository;
 
 import com.julindang.consume.domain.Consume;
+import org.springframework.cglib.core.Local;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,4 +18,7 @@ public interface ConsumeRepository extends JpaRepository<Consume, Long> {
 
     @Query("SELECT c FROM Consume c WHERE (c.createdAt BETWEEN :start AND :end) and c.memberId = :memberId")
     List<Consume> findByWeekConsumes(LocalDate minusDays, LocalDate now, Long memberId);
+
+    @Query("SELECT c FROM Consume c WHERE c.memberId = :memberId")
+    List<Consume> findByMonth(Long memberId);
 }
