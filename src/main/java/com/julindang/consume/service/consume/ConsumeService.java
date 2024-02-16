@@ -8,8 +8,5 @@ import java.util.List;
 
 public interface ConsumeService {
     public ConsumeSaveResponseDto save(ConsumeSaveRequestDto dto);
-    public TodayTotalConsumeResponseDto getTodayTotalConsume();
-    public TodayConsumeResponseDto getTodayConsumes();
-    public List<ConsumeOfDayResponseDto> getConsumeOfDay();
-    public List<ConsumeOfWeekResponseDto> getConsumeOfWeek();
+    public List<ConsumeAllResponseDto> getAll();
 }

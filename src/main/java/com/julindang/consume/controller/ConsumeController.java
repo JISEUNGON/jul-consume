@@ -26,12 +26,7 @@ public class ConsumeController {
     /**
      * 당 섭취 기록 추가
      * */
-    /*@Operation(description = "섭취 기록 추가 API")
-    @PostMapping("/save")
-    public ResponseEntity<ConsumeSaveResponseDto> save(@RequestBody ConsumeSaveRequestDto dto) {
-        return ResponseEntity.ok(consumeService.save(dto));
-    }*/
-    @Operation(description = "섭취 기록 추가 API")
+    @Operation(description = "카페 섭취 기록 추가 API")
     @PostMapping("/save")
     public ResponseEntity<ConsumeSaveResponseDto> save(@RequestBody ConsumeSaveRequestDto dto) {
         return ResponseEntity.ok(consumeService.save(dto));
@@ -43,43 +38,13 @@ public class ConsumeController {
         return ResponseEntity.ok(freeConsumeService.save(dto));
     }
 
-    /**
-     * 오늘의 총 당 섭취량
-     * */
-    @Operation(description = "오늘의 총 당 섭취량 확인 API")
-    @GetMapping("/total")
-    public ResponseEntity<TodayTotalConsumeResponseDto> getTodayTotalConsume() {
-        return ResponseEntity.ok(consumeService.getTodayTotalConsume());
+    @GetMapping("/all")
+    public ResponseEntity<List<ConsumeAllResponseDto>> getAll() {
+        return ResponseEntity.ok(consumeService.getAll());
     }
 
-    /**
-     * 오늘의 당 섭취 기록
-     * */
-    @Operation(description = "오늘의 총 당 섭취량 확인 API")
-    @GetMapping("/today")
-    public ResponseEntity<TodayConsumeResponseDto> getTodayConsumes() {
-        return ResponseEntity.ok(consumeService.getTodayConsumes());
+    @GetMapping("/free-all")
+    public ResponseEntity<List<FreeConsumeAllResponseDto>> getFreeAll() {
+        return ResponseEntity.ok(freeConsumeService.getAll());
     }
-
-    /**
-     * 일별 섭취량
-     * */
-    @Operation(description = "일별 섭취량 확인 API")
-    @GetMapping("/day")
-    public ResponseEntity<List<ConsumeOfDayResponseDto>> getConsumeOfDay() {
-        return ResponseEntity.ok(consumeService.getConsumeOfDay());
-    }
-
-    /**
-     * 주별 섭취량
-     * */
-    @Operation(description = "주별 섭취량 확인 API")
-    @GetMapping("/week")
-    public ResponseEntity<List<ConsumeOfWeekResponseDto>> getConsumeOfWeek() {
-        return ResponseEntity.ok(consumeService.getConsumeOfWeek());
-    }
-
-    /**
-     * 월별 섭취량
-     * */
 }

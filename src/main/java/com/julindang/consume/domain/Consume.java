@@ -19,20 +19,26 @@ public class Consume {
     @Column(name = "consume_id", columnDefinition = "bigint")
     private Long consumeId;
 
-    @Column(name = "name", columnDefinition = "varchar", length = 50)
-    private String name;
+    @Column(name = "cafe_name", columnDefinition = "varchar", length = 30)
+    private String cafeName;
+
+    @Column(name = "beverage_name", columnDefinition = "varchar", length = 50)
+    private String beverageName;
 
     @Column(name = "hot", columnDefinition = "tinyint")
     private Boolean hot;
 
-    @Column(name = "size", columnDefinition = "int")
-    private Long size;
+    @Column(name = "volume", columnDefinition = "int")
+    private Long volume;
 
-    @Column(name = "sugar", columnDefinition = "double")
-    private Double sugar;
+    @Column(name = "size", columnDefinition = "varchar", length = 10)
+    private String size;
 
-    @Column(name = "calorie", columnDefinition = "double")
-    private Double calorie;
+    @Column(name = "sugar", columnDefinition = "int")
+    private Long sugar;
+
+    @Column(name = "calorie", columnDefinition = "int")
+    private Long calorie;
 
     @Column(name = "member_id", columnDefinition = "bigint")
     private Long memberId;

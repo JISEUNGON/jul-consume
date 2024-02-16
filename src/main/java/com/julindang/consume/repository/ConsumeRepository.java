@@ -10,15 +10,5 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface ConsumeRepository extends JpaRepository<Consume, Long> {
-    @Query("SELECT c FROM Consume c WHERE date(c.createdAt) = :now and c.memberId = :memberId")
-    public List<Consume> findByMemberIdAndCreatedAt(@Param("now")LocalDate now, @Param("memberId") Long memberId);
-
-    @Query("SELECT c FROM Consume c WHERE (c.createdAt BETWEEN :start AND :end) and c.memberId = :memberId")
-    public List<Consume> findByDayConsumes(@Param("start") LocalDate start, @Param("end") LocalDate end, Long memberId);
-
-    @Query("SELECT c FROM Consume c WHERE (c.createdAt BETWEEN :start AND :end) and c.memberId = :memberId")
-    List<Consume> findByWeekConsumes(@Param("start") LocalDate minusDays, @Param("end") LocalDate now, Long memberId);
-
-    @Query("SELECT c FROM Consume c WHERE c.memberId = :memberId")
-    List<Consume> findByMonth(Long memberId);
+    public List<Consume> findByMemberIdAndDeletedIsFalse(Long memberId);
 }

@@ -19,9 +19,9 @@ public class ConsumeTopping {
     @Column(name = "consume_id", columnDefinition = "int")
     private Long consumeId;
 
-    @Column(name = "topping_id", columnDefinition = "bigint")
-    private Long toppingId;
+    @Column(name = "topping_name", columnDefinition = "varchar", length = 30)
+    private String toppingName;
 
-    @Column(name = "number", columnDefinition = "int")
-    private Long number;
+    @Column(name = "number", columnDefinition = "varchar", length = 5)
+    private String number;
 }

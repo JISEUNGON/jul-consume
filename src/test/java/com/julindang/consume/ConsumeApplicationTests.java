@@ -8,12 +8,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class ConsumeApplicationTests {
-    @Autowired
-    private ConsumeService consumeService;
-
-    @Test
-    void contextLoads() {
-        final TodayTotalConsumeResponseDto todayConsume = consumeService.getTodayTotalConsume();
-    }
 
 }

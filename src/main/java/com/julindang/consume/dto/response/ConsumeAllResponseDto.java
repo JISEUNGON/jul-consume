@@ -1,18 +1,19 @@
-package com.julindang.consume.dto.request;
+package com.julindang.consume.dto.response;
 
+import com.julindang.consume.domain.ConsumeTopping;
 import com.julindang.consume.vo.PersonalOption;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Getter
 @Setter
-public class ConsumeSaveRequestDto {
+public class ConsumeAllResponseDto {
+    private Long consumeId;
     private String cafeName;
     private String beverageName;
     private Boolean hot;
@@ -20,5 +21,6 @@ public class ConsumeSaveRequestDto {
     private String size;
     private Long sugar;
     private Long calorie;
-    private List<PersonalOption> toppings;
+    private List<ConsumeTopping> options;
+    private LocalDateTime createdAt;
 }
