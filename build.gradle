@@ -46,6 +46,9 @@ dependencies {
 
     //model mapper
     implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.9'
+
+    //slack
+    implementation 'com.github.maricn:logback-slack-appender:1.4.0'
 }
 
 dependencyManagement {
