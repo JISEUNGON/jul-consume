@@ -17,7 +17,7 @@ public interface ConsumeRepository extends JpaRepository<Consume, Long> {
     public List<Consume> findByDayConsumes(@Param("start") LocalDate start, @Param("end") LocalDate end, Long memberId);
 
     @Query("SELECT c FROM Consume c WHERE (c.createdAt BETWEEN :start AND :end) and c.memberId = :memberId")
-    List<Consume> findByWeekConsumes(LocalDate minusDays, LocalDate now, Long memberId);
+    List<Consume> findByWeekConsumes(@Param("start") LocalDate minusDays, @Param("end") LocalDate now, Long memberId);
 
     @Query("SELECT c FROM Consume c WHERE c.memberId = :memberId")
     List<Consume> findByMonth(Long memberId);

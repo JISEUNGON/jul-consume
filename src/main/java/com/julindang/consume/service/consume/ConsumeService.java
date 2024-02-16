@@ -1,5 +1,6 @@
-package com.julindang.consume.service;
+package com.julindang.consume.service.consume;
 
+import com.julindang.consume.domain.Consume;
 import com.julindang.consume.dto.request.ConsumeSaveRequestDto;
 import com.julindang.consume.dto.response.*;
 

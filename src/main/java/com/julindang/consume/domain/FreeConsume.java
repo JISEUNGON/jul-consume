@@ -7,32 +7,29 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "consume")
+@Table(name = "free_consume")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
 @Setter
-public class Consume {
+public class FreeConsume {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "consume_id", columnDefinition = "bigint")
+    @Column(name = "consume_id", columnDefinition = "int")
     private Long consumeId;
 
     @Column(name = "name", columnDefinition = "varchar", length = 50)
     private String name;
 
-    @Column(name = "hot", columnDefinition = "tinyint")
-    private Boolean hot;
+    @Column(name = "sugar", columnDefinition = "int")
+    private Long sugar;
 
-    @Column(name = "size", columnDefinition = "int")
-    private Long size;
+    @Column(name = "calorie", columnDefinition = "int")
+    private Long calorie;
 
-    @Column(name = "sugar", columnDefinition = "double")
-    private Double sugar;
-
-    @Column(name = "calorie", columnDefinition = "double")
-    private Double calorie;
+    @Column(name = "deleted", columnDefinition = "tinyint")
+    private Boolean deleted;
 
     @Column(name = "member_id", columnDefinition = "bigint")
     private Long memberId;
@@ -43,7 +40,4 @@ public class Consume {
     @Column(name = "created_at", columnDefinition = "datetime")
     @CreationTimestamp
     private LocalDateTime createdAt;
-
-    @Column(name = "deleted", columnDefinition = "tinyint")
-    private Boolean deleted;
 }

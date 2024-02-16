@@ -1,4 +1,4 @@
-package com.julindang.consume.service;
+package com.julindang.consume.service.consume;
 
 import com.julindang.consume.dto.response.*;
 import com.julindang.consume.exception.consume.ParameterNullOrEmptyException;

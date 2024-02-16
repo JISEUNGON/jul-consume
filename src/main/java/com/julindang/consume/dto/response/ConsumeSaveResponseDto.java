@@ -10,6 +10,6 @@ import lombok.*;
 public class ConsumeSaveResponseDto {
     private Long consumeId;
     private String name;
-    private Double sugar;
-    private Double calorie;
+    private Long sugar;
+    private Long calorie;
 }
